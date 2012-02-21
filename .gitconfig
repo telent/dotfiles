@@ -1,0 +1,8 @@
+[color]
+	ui = auto
+[user]
+	email = dan@telent.net
+	name = Daniel Barlow
+[alias]
+	ci=commit
+	rec=add -p -i

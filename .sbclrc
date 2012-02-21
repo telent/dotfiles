@@ -1,0 +1,8 @@
+;;; -*- Lisp -*-
+(in-package :cl-user)
+(setf *compile-print* nil)
+(require :asdf)
+(setf SB-DEBUG:*DEBUG-BEGINNER-HELP-P* nil)
+(pushnew "/home/dan/src/defsystems/" asdf:*central-registry*)
+
+(declaim (optimize (safety 3) (debug 3)))

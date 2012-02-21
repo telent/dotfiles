@@ -1,0 +1,54 @@
+#ifdef COLOR
+*customization: -color
+#endif
+
+Emacs*cursorColor: black
+Emacs*bitmapIcon: on
+Emacs*font: fixed
+!-*-lucidatypewriter-medium-*-*-*-*-100-*-*-*-*-*-*
+Emacs.geometry: 80x40
+
+Seyon.modems: /dev/modem
+
+XTerm*cursorColor: Orchid
+XTerm*reverseVideo: false
+XTerm*scrollBar: true
+XTerm*reverseWrap: true
+XTerm*font: fixed
+!-*-lucidatypewriter-medium-*-*-*-*-100-*-*-*-*-*-*
+XTerm*fullCursor: true
+XTerm*scrollTtyOutput: off
+XTerm*scrollKey: on
+XTerm*VT100*translations:       #override \
+        Shift<Key>Return: string(" &") string(0x0A) \n\
+        Meta<Key>Return: string(" | less") string(0x0A) \n\
+        ~Shift<Key>Prior: scroll-back(1,page) \n\
+        ~Shift<Key>Next: scroll-forw(1,page) \n\
+        Shift<Key>Prior: scroll-back(1) \n\
+        Shift<Key>Next: scroll-forw(1) \n\
+        <Key>Delete: string(0x1b) string("[2~") \n\
+        <Key>BackSpace: string(0x7f)
+XTerm*titleBar: false
+XTerm*saveLines: 10000
+XTerm.termName: xterm
+XTerm*foreground: black
+XTerm*background: white
+XTerm*locale: true
+XTerm*titeInhibit: true
+XTerm*utf8: 1
+
+XTerm_color*reverseVideo: false
+XTerm_color*scrollBar: true
+XTerm_color*saveLines: 5000
+XTerm_color*reverseWrap: true
+XTerm_color*font: fixed
+XTerm_color.geometry: 80x25+20+20
+XTerm_color*fullCursor: true
+XTerm_color*scrollTtyOutput: off
+XTerm_color*scrollKey: on
+XTerm_color*VT100.Translations: #override\n\
+	<KeyPress>Prior : scroll-back(1,page)\n\
+	<KeyPress>Next : scroll-forw(1,page)
+XTerm_color*titleBar: false
+
+*beNiceToColormap:  False
