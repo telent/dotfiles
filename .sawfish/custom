@@ -1,0 +1,18 @@
+;; sawfish user customization -- do not edit by hand!
+;; sawfish version 1.5.3, written Tue Feb 21 13:24:40 2012
+
+(custom-set-keymap (quote window-keymap) (quote (keymap (tab-raise-right-window . "H-ISO_Left_Tab") (maximize-window-vertically-toggle . "Super-Prior") (throw-focused-window-left . "Super-Left") (throw-focused-window-top . "Super-Up") (throw-focused-window-bottom . "Super-Down") (throw-focused-window-right . "Super-Right") (tab-raise-left-window . "W-ISO_Left_Tab") (raise-and-pass-through-click . "Button1-Click") (move-window-interactively . "W-Button1-Move") (popup-window-menu . "W-Button2-Click") (raise-lower-window . "W-Button3-Click") (lower-window . "W-Down") (raise-window . "W-Up"))))
+(custom-set-typed-variable (quote focus-mode) (quote enter-only) (quote symbol))
+(custom-set-keymap (quote global-keymap) (quote (keymap ((set-viewport-linear 0) . "M-F1") ((run-shell-command "xterm") . "Super-x") ((gimme-exact-class "Firefox" "firefox") . "Super-f") ((gimme-exact-class "XTerm" "xterm") . "Super-t") ((gimme-exact-class "Emacs" "emacs") . "Super-e") (raise-window . "F4") (lower-window . "F5") ((set-viewport-linear 2) . "M-F3") ((set-viewport-linear 3) . "M-F4") (call-command-with-output-to-screen . "M-C-.") ((set-viewport-linear 1) . "M-F2") (next-workspace . "C-Right") (previous-workspace . "C-Left"))))
+(custom-set-typed-variable (quote default-font) (quote ("Pango" . "Sans Bold 8")) (quote font))
+(custom-set-typed-variable (quote default-frame-style) (quote microGUI) (quote frame-style))
+(custom-set-typed-variable (quote place-window-mode) (quote centered) (quote symbol))
+(custom-set-typed-variable (quote wm-modifier-value) (quote (meta)) (quote modifier-list))
+(custom-set-keymap (quote root-window-keymap) (quote (keymap (popup-root-menu . "Button2-Click") ((run-shell-command "/usr/bin/xterm") . "C-s"))))
+(custom-set-typed-variable (quote xterm-program) (quote "xterm") (quote string))
+(custom-set-typed-variable (quote focus-windows-when-mapped) (quote ()) (quote boolean))
+(custom-set-keymap (quote title-keymap) (quote (keymap (raise-window-and-pass-through-click . "Button1-Click1") (move-window-interactively . "Button1-Move") (toggle-window-shaded . "Button1-Click2") (resize-window-interactively . "Button2-Move") (popup-window-menu . "Button3-Off"))))
+(custom-set-typed-variable (quote edge-flip-only-when-moving) (quote t) (quote boolean))
+(custom-set-typed-variable (quote edge-flip-enabled) (quote t) (quote boolean) (quote edge-flip))
+(custom-set-typed-variable (quote window-history-auto-save-position) (quote nil) (quote boolean) (quote window-history))
+(custom-set-keymap (quote border-keymap) (quote (keymap (raise-window . "Button1-Off") (resize-window-interactively . "Button1-Move") (move-window-interactively . "Button2-Move") (raise-lower-window . "Button3-Off"))))
