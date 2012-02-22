@@ -39,24 +39,21 @@
 
 (define-key global-map [f9] 'next-error)
 (define-key global-map [f10] 'goto-line)
-(define-key global-map [f11] 
-  '(lambda () (interactive nil)
-    (let ((s (shell-command-to-string "echo `date +%s` + 2208988800 | bc ")))
-      (find-file (format "/ssh:telent@ww.telent.net:doc/telent/htdocs/diary/data/%s.html"
-			 (subseq s 0 (1- (length s)))))
-      (setf sgml-parent-document '("HEADER.inc" "HTML" "BODY" "BODY" ())))))
-(define-key global-map [f7] 
-  '(lambda () (interactive nil)
-     (find-file "/telent@ww.telent.net:doc/telent/htdocs/dates.html")))
-
+;(define-key global-map [f11] 
+;  '(lambda () (interactive nil)
+;    (let ((s (shell-command-to-string "echo `date +%s` + 2208988800 | bc ")))
+;      (find-file (format "/ssh:telent@ww.telent.net:doc/telent/htdocs/diary/dat;a/%s.html";
+;			 (subseq s 0 (1- (length s)))))
+;      (setf sgml-parent-document '("HEADER.inc" "HTML" "BODY" "BODY" ())))))
 
 (define-key global-map [f12] 'compile)
-(define-key global-map [\s-s] 'slime-selector)
-(define-key global-map [?\s-r]
-  (lambda () (interactive)
-	  (if (slime-connected-p)
-	      (switch-to-buffer "*inferior-lisp*")
-	      (slime))))
+
+;(define-key global-map [\s-s] 'slime-selector)
+;(define-key global-map [?\s-r]
+;  (lambda () (interactive);
+;	  (if (slime-connected-p)
+;	      (switch-to-buffer "*inferior-lisp*")
+;	      (slime))))
 
 ;
 
@@ -66,8 +63,6 @@
   '(lambda () (interactive nil)   (insert (buffer-file-name))))
 (define-key global-map "\C-c\C-sf" 
   '(lambda () (interactive nil) (message (buffer-file-name))))
-
-
 
 (define-key global-map [home] 'beginning-of-line)
 
