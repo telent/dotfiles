@@ -9,7 +9,7 @@
     (warp-cursor-to-window w (car offset) (cdr offset))))
 
 (defun throw-window-right (window)
-  (let ((dim (window-dimensions window))
+  (let ((dim (window-frame-dimensions window))
 	(xy (window-position window)))
     (throw-window-do-move window 
 			  (- (car (current-head-dimensions)) (car dim))
@@ -24,7 +24,7 @@
     (throw-window-do-move window (car xy) 0)))
 
 (defun throw-window-bottom (window)
-  (let ((dim (window-dimensions window))
+  (let ((dim (window-frame-dimensions window))
 	(xy (window-position window)))
     (throw-window-do-move window 
 			  (car xy)
