@@ -7,8 +7,8 @@
 (setq wq "You're not using vi!")	; sigh.  Whose idea was it to have
 					; ESC : as eval-expression, then?
 (setq load-path
-      (list* "~/src/cl-net/slime/" "~/src/cl-net/slime/contrib/" 
-	     "~/emacs-lisp"  "~/src/gnus-5.10.6/lisp/"
+      (list* ; "~/src/cl-net/slime/" "~/src/cl-net/slime/contrib/" 
+	     "~/emacs-lisp" "~/emacs-lisp/egg"  "~/src/gnus-5.10.6/lisp/"
 	     load-path))
 
 (setq Info-default-directory-list
