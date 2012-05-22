@@ -135,6 +135,16 @@
 (setq common-lisp-hyperspec-root "file:///usr/share/doc/hyperspec/")
 (setq common-lisp-hyperspec-symbol-table "/usr/share/doc/hyperspec/Data/Map_Sym.txt")
 
+(eval-after-load 'clojure-mode
+  '(define-clojure-indent
+     (describe 'defun)
+     (testing 'defun)
+     (given 'defun)
+     (using 'defun)
+     (with 'defun)
+     (it 'defun)
+     (do-it 'defun)))
+
 
 
 ;; ***********************************************************************
@@ -188,6 +198,7 @@
  '(browse-url-browser-function (quote browse-url-netscape))
  '(canlock-password "c504963db2bafd718ff487d9217561e4d030710f")
  '(case-fold-search t)
+ '(clojure-swank-command "lein2 jack-in %s")
  '(current-language-environment "ASCII")
  '(display-time-mode t)
  '(global-font-lock-mode t nil (font-lock))
