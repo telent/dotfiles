@@ -11,6 +11,10 @@
 	     "~/emacs-lisp" "~/emacs-lisp/egg"  "~/src/gnus-5.10.6/lisp/"
 	     load-path))
 
+(require 'package)
+(add-to-list 'package-archives 
+	     '("marmalade" . "http://marmalade-repo.org/packages/"))
+
 (setq Info-default-directory-list
       (cons (expand-file-name "~/emacs-lisp/gnus/texi/")
 	    Info-default-directory-list))
