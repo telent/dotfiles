@@ -288,4 +288,4 @@ of Dillo, ignoring new-windonw argument"
   
 (put 'downcase-region 'disabled nil)
 
-(setq notmuch-command "/home/dan/bin/rnotmuch")
+(setq notmuch-command "/usr/bin/notmuch")
