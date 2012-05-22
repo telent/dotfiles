@@ -210,6 +210,8 @@
  '(mm-automatic-display (quote ("text/plain" "text/enriched" "text/richtext" "te xt/x-vcard" "image/.*" "message/delivery-status" "multipart/.*" "message/rfc822" "text/x-patch" "application/pgp-signature" "application/emacs-lisp")))
  '(pgg-passphrase-cache-expiry 300)
  '(pgg-query-keyserver t)
+ '(ps-lpr-command "lp")
+ '(send-mail-function (quote mailclient-send-it))
  '(shell-prompt-pattern "^[^#$%>
 ]*[#$%>;] *")
  '(slime-conservative-indentation nil)
