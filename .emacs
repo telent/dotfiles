@@ -118,10 +118,10 @@
 (setq slime-multiprocessing t)
 
 (setq lisp-indent-function 'common-lisp-indent-function)
-(require 'slime)
-
-(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
-(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
+;(require 'slime);
+;
+;(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+;(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
 
 ;(define-key slime-repl-mode-map [C-up] 'slime-repl-previous-input)
 ;(define-key slime-repl-mode-map [C-down] 'slime-repl-next-input)
@@ -130,7 +130,7 @@
 
 (setq scheme-program-name "guile")
 
-(setq inferior-lisp-program "/usr/local/bin/sbcl --noinform")
+;(setq inferior-lisp-program "/usr/local/bin/sbcl --noinform")
 
 (setq common-lisp-hyperspec-root "file:///usr/share/doc/hyperspec/")
 (setq common-lisp-hyperspec-symbol-table "/usr/share/doc/hyperspec/Data/Map_Sym.txt")
