@@ -242,7 +242,8 @@ of Dillo, ignoring new-windonw argument"
 			   (ange-ftp-error
 			    host user (concat "Passive mode failed: "
 					      result))))))
-(when (eq debian-emacs-flavor 'emacs21)
+(when (and (boundp 'debian-emacs-flavor)
+	   (eq debian-emacs-flavor 'emacs21))
   (tool-bar-mode 0)
   (scroll-bar-mode -1)
   ;(gnus-smiley-display 0)
