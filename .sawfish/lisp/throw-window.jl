@@ -2,18 +2,18 @@
 
 (defun throw-window-do-move (w x y)
   (let* ((mousexy (query-pointer))
-	 (windowxy (window-position w))
-	 (offset (cons (- (car mousexy) (car windowxy))
-		       (- (cdr mousexy) (cdr windowxy)))))
+         (windowxy (window-position w))
+         (offset (cons (- (car mousexy) (car windowxy))
+                       (- (cdr mousexy) (cdr windowxy)))))
     (move-window-to w x y)
     (warp-cursor-to-window w (car offset) (cdr offset))))
 
 (defun throw-window-right (window)
   (let ((dim (window-frame-dimensions window))
-	(xy (window-position window)))
+        (xy (window-position window)))
     (throw-window-do-move window 
-			  (- (car (current-head-dimensions)) (car dim))
-			  (cdr xy))))
+                          (- (car (current-head-dimensions)) (car dim))
+                          (cdr xy))))
 
 (defun throw-window-left (window)
   (let ((xy (window-position window)))
@@ -25,10 +25,10 @@
 
 (defun throw-window-bottom (window)
   (let ((dim (window-frame-dimensions window))
-	(xy (window-position window)))
+        (xy (window-position window)))
     (throw-window-do-move window 
-			  (car xy)
-			  (- (cdr (current-head-dimensions)) (cdr dim)))))
+                          (car xy)
+                          (- (cdr (current-head-dimensions)) (cdr dim)))))
 
 
 (define-command 'throw-focused-window-right throw-window-right  #:spec "%f")
