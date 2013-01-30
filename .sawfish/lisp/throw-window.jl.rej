@@ -1,0 +1,24 @@
+--- .sawfish/lisp/throw-window.jl
++++ .sawfish/lisp/throw-window.jl
+@@ -42,7 +72,7 @@
+   (let ((dim (window-frame-dimensions window))
+         (xy (window-position window)))
+     (throw-window-do-move window 
+-			  (- (car (current-head-dimensions)) (car dim))
++                          (- (throw-window-find-right-edge) (car dim))
+                           (cdr xy))))
+ 
+ (defun throw-window-left (window)
+@@ -58,11 +88,10 @@
+         (xy (window-position window)))
+     (throw-window-do-move window 
+                           (car xy)
+-			  (- (cdr (current-head-dimensions)) (cdr dim)))))
++                          (- (throw-window-find-bottom-edge) (cdr dim)))))
+ 
+ 
+ (define-command 'throw-focused-window-right throw-window-right  #:spec "%f")
+ (define-command 'throw-focused-window-left throw-window-left  #:spec "%f")
+ (define-command 'throw-focused-window-top throw-window-top  #:spec "%f")
+ (define-command 'throw-focused-window-bottom throw-window-bottom  #:spec "%f")
+-
