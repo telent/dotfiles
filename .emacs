@@ -25,7 +25,13 @@
 (and (fboundp 'display-battery) (display-battery))
 (load "jka-compr")
 
+(setq strip-trailing-whitespace-modes ())
 
+(defun auto-strip-trailing-whitespace (&optional arg interactive)
+  (and (member major-mode strip-trailing-whitespace-modes)
+       (delete-trailing-whitespace)))
+
+(add-hook 'before-save-hook 'auto-strip-trailing-whitespace)
 
 (font-lock-mode 1)
 (setq tramp-default-method "ssh")
@@ -111,6 +117,10 @@
 	  '(lambda () 
 	     (define-key ruby-mode-map [?\s-.] 'ruby-send-definition-and-go)))
 
+(pushnew 'ruby-mode strip-trailing-whitespace-modes)
+(pushnew 'feature-mode strip-trailing-whitespace-modes)
+
+
 ;; ***********************************************************************
 ;; Scheme and lisp modes
 
@@ -145,7 +155,7 @@
      (it 'defun)
      (do-it 'defun)))
 
-
+(pushnew 'clojure-mode strip-trailing-whitespace-modes)
 
 ;; ***********************************************************************
 ;; (C|C++) Modes
