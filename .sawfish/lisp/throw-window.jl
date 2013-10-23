@@ -6,6 +6,41 @@
           (reduce fn (car list) (cdr list)) 
           (car list))))
 
+
+(defun throw-window-horiz-stops (max-x)
+  (let* ((windows (managed-windows))
+         (pairs (mapcar (lambda (w)
+                          (let ((x (car (window-position w)))
+                                (w (car (window-frame-dimensions w))))
+                            (list x (+ x w))))
+                        windows)))
+    (sort (filter (lambda (x) (<= x max-x))
+                  (uniquify-list (cons max-x (apply append pairs))))
+
+          #'<)))
+
+(defun throw-window-vert-stops ()
+  (let* ((windows (managed-windows))
+         (far-edge (throw-window-find-bottom-edge))
+         (pairs (mapcar (lambda (w)
+                          (let ((y (cdr (window-position w)))
+                                (h (cdr (window-frame-dimensions w))))
+                            (list y (+ y h))))
+                        windows)))
+    (sort (filter (lambda (y) (< y far-edge))
+                  (uniquify-list (apply append pairs)) #'<))))
+
+(defun next-stop (stops current)
+  (if stops
+      (if (> (car stops) current)
+          (car stops)
+          (next-stop (cdr stops) current))))
+
+(defun previous-stop (stops current)
+  (cond ((not (cadr stops)) (car stops))
+        ((>= (cadr stops) current) (car stops))
+        (t (previous-stop (cdr stops) current))))
+
 (defun throw-window-find-bottom-edge ()
   (- (cdr (current-head-dimensions))
      2
@@ -40,15 +75,17 @@
     (warp-cursor-to-window w (car offset) (cdr offset))))
 
 (defun throw-window-right (window)
-  (let ((dim (window-frame-dimensions window))
-        (xy (window-position window)))
-    (throw-window-do-move window 
-			  (- (throw-window-find-right-edge) (car dim))
-                          (cdr xy))))
+  (let* ((dim (window-frame-dimensions window))
+         (xy (window-position window))
+         (edge (- (throw-window-find-right-edge) (car dim)))
+         (stop (next-stop (throw-window-horiz-stops edge) (car xy))))
+    (throw-window-do-move window stop (cdr xy))))
 
 (defun throw-window-left (window)
-  (let ((xy (window-position window)))
-    (throw-window-do-move window 0 (cdr xy))))
+  (let* ((xy (window-position window))
+         (edge (throw-window-find-right-edge))
+         (stop (previous-stop (throw-window-horiz-stops edge) (car xy))))
+    (throw-window-do-move window stop (cdr xy))))
 
 (defun throw-window-top (window)
   (let ((xy (window-position window)))
