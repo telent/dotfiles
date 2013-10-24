@@ -156,6 +156,7 @@
      (do-it 'defun)))
 
 (pushnew 'clojure-mode strip-trailing-whitespace-modes)
+(add-hook 'lisp-mode-hook '(lambda () (setq indent-tabs-mode nil)))
 
 ;; ***********************************************************************
 ;; (C|C++) Modes
