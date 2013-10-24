@@ -40,8 +40,8 @@
           ((>= (cadr stops) current) (car stops))
           (t (previous-stop (cdr stops) current))))
   
-  (defun find-bottom-edge ()
-    (- (cdr (current-head-dimensions))
+  (defun find-far-edge (co-ord property-index)
+    (- (co-ord (current-head-dimensions))
        2
        (reduce + 0 
                (mapcar (lambda (w)
@@ -52,19 +52,9 @@
                                0))) 
                        (managed-windows)))))
   
-;;; XXX OAOO please
-  (defun find-right-edge ()
-    (- (car (current-head-dimensions))
-       2
-       (reduce + 0 
-               (mapcar (lambda (w)
-                         (let ((p (get-x-property w '_NET_WM_STRUT_PARTIAL))
-                               (p1 (get-x-property w '_NET_WM_STRUT)))
-                           (if (or p p1)
-                               (aref (caddr (or p p1)) 1) 
-                               0))) 
-                       (managed-windows)))))
-  
+  (defun find-bottom-edge () (find-far-edge y-coord 3))
+  (defun find-right-edge () (find-far-edge x-coord 1))
+
   (defun do-move (w x y)
     (let* ((mousexy (query-pointer))
            (windowxy (window-position w))
