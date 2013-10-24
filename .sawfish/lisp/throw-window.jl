@@ -11,27 +11,23 @@
           (reduce fn (car list) (cdr list)) 
           (car list))))
 
-  (defun horiz-stops (max-x)
+  (defun x-coord (pair) (car pair))
+  (defun y-coord (pair) (cdr pair))
+
+  (defun stops-for (coord far-edge)
     (let* ((windows (managed-windows))
-           (pairs (mapcar (lambda (w)
-                            (let ((x (car (window-position w)))
-                                  (w (car (window-frame-dimensions w))))
-                              (list x (+ x w))))
-                          windows)))
-      (sort (filter (lambda (x) (<= x max-x))
-                    (uniquify-list (cons max-x (apply append pairs))))
+           (pairs (mapcar
+                   (lambda (w)
+                     (let ((offset (coord (window-position w)))
+                           (size (coord (window-frame-dimensions w))))
+                       (list offset (+ offset size))))
+                   windows)))
+      (sort (filter (lambda (x) (<= x far-edge))
+                    (uniquify-list (cons far-edge (apply append pairs))))
             #'<)))
-  
-  (defun vert-stops ()
-    (let* ((windows (managed-windows))
-           (far-edge (find-bottom-edge))
-           (pairs (mapcar (lambda (w)
-                            (let ((y (cdr (window-position w)))
-                                  (h (cdr (window-frame-dimensions w))))
-                              (list y (+ y h))))
-                          windows)))
-      (sort (filter (lambda (y) (< y far-edge))
-                    (uniquify-list (apply append pairs)) #'<))))
+
+  (defun horiz-stops (max-x) (stops-for #'x-coord max-x))
+  (defun vert-stops (max-y) (stops-for #'y-coord max-y))
   
   (defun next-stop (stops current)
     (if stops
