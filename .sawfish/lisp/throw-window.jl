@@ -73,9 +73,16 @@
   (defun throw-window-right (window)
     (let* ((dim (window-frame-dimensions window))
            (xy (window-position window))
-           (edge (- (find-right-edge) (car dim)))
+           (edge (- (find-right-edge) (x-coord dim)))
            (stop (next-stop (horiz-stops edge) (car xy))))
       (do-move window stop (cdr xy))))
+
+  (defun throw-window-down (window)
+    (let* ((dim (window-frame-dimensions window))
+           (xy (window-position window))
+           (edge (- (find-bottom-edge) (y-coord dim)))
+           (stop (next-stop (vert-stops edge) (y-coord xy))))
+      (do-move window (car xy) stop)))
 
   (defun throw-window-left (window)
     (let* ((xy (window-position window))
@@ -87,11 +94,6 @@
            (new-y (previous-stop-for #'y-coord xy)))
       (do-move window (car xy) new-y)))
   
-  (defun throw-window-down (window)
-    (let ((dim (window-frame-dimensions window))
-          (xy (window-position window)))
-      (do-move window (car xy) (- (find-bottom-edge) (cdr dim)))))
-
   (define-command 'throw-focused-window-right throw-window-right  #:spec "%f")
   (define-command 'throw-focused-window-left throw-window-left  #:spec "%f")
   (define-command 'throw-focused-window-top throw-window-up  #:spec "%f")
