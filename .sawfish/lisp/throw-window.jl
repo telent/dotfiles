@@ -62,9 +62,10 @@
 
   (defun do-move (w x y)
     (let* ((mousexy (query-pointer))
+           (frame-offset (window-frame-offset w))
            (windowxy (window-position w))
-           (offset (cons (- (car mousexy) (car windowxy))
-                         (- (cdr mousexy) (cdr windowxy)))))
+           (offset (cons (+ (car frame-offset) (- (car mousexy) (car windowxy)))
+                         (+ (cdr frame-offset) (- (cdr mousexy) (cdr windowxy))))))
       (move-window-to w x y)
       (warp-cursor-to-window w (car offset) (cdr offset))
       (raise-window w)))
