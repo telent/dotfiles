@@ -72,8 +72,9 @@
   
   (defun throw-window-left (window)
     (let* ((xy (window-position window))
-           (edge (find-right-edge))
-           (stop (previous-stop (horiz-stops edge) (car xy))))
+           (x (x-coord xy))
+           (stops (horiz-stops x))
+           (stop (previous-stop stops x)))
       (do-move window stop (cdr xy))))
   
   (defun throw-window-up (window)
