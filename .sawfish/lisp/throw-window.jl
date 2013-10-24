@@ -74,14 +74,14 @@
     (let* ((dim (window-frame-dimensions window))
            (xy (window-position window))
            (edge (- (find-right-edge) (x-coord dim)))
-           (stop (next-stop (horiz-stops edge) (car xy))))
+           (stop (next-stop (stops-for #'x-coord edge) (x-coord xy))))
       (do-move window stop (cdr xy))))
 
   (defun throw-window-down (window)
     (let* ((dim (window-frame-dimensions window))
            (xy (window-position window))
            (edge (- (find-bottom-edge) (y-coord dim)))
-           (stop (next-stop (vert-stops edge) (y-coord xy))))
+           (stop (next-stop (stops-for #'y-coord edge) (y-coord xy))))
       (do-move window (car xy) stop)))
 
   (defun throw-window-left (window)
