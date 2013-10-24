@@ -40,6 +40,11 @@
           ((>= (cadr stops) current) (car stops))
           (t (previous-stop (cdr stops) current))))
   
+  (defun previous-stop-for (fn point)
+    (let* ((value (fn point))
+           (stops (stops-for fn value)))
+      (previous-stop stops value)))
+
   (defun find-far-edge (co-ord property-index)
     (- (co-ord (current-head-dimensions))
        2
@@ -61,7 +66,8 @@
            (offset (cons (- (car mousexy) (car windowxy))
                          (- (cdr mousexy) (cdr windowxy)))))
       (move-window-to w x y)
-      (warp-cursor-to-window w (car offset) (cdr offset))))
+      (warp-cursor-to-window w (car offset) (cdr offset))
+      (raise-window w)))
   
   (defun throw-window-right (window)
     (let* ((dim (window-frame-dimensions window))
@@ -69,26 +75,24 @@
            (edge (- (find-right-edge) (car dim)))
            (stop (next-stop (horiz-stops edge) (car xy))))
       (do-move window stop (cdr xy))))
-  
+
   (defun throw-window-left (window)
     (let* ((xy (window-position window))
-           (x (x-coord xy))
-           (stops (horiz-stops x))
-           (stop (previous-stop stops x)))
-      (do-move window stop (cdr xy))))
-  
+           (new-x (previous-stop-for #'x-coord xy)))
+      (do-move window new-x (cdr xy))))
+
   (defun throw-window-up (window)
-    (let ((xy (window-position window)))
-      (do-move window (car xy) 0)))
+    (let* ((xy (window-position window))
+           (new-y (previous-stop-for #'y-coord xy)))
+      (do-move window (car xy) new-y)))
   
   (defun throw-window-down (window)
     (let ((dim (window-frame-dimensions window))
           (xy (window-position window)))
       (do-move window (car xy) (- (find-bottom-edge) (cdr dim)))))
-  )
 
-(define-command 'throw-focused-window-right throw-window-right  #:spec "%f")
-(define-command 'throw-focused-window-left throw-window-left  #:spec "%f")
-(define-command 'throw-focused-window-top throw-window-up  #:spec "%f")
-(define-command 'throw-focused-window-bottom throw-window-down #:spec "%f")
-
+  (define-command 'throw-focused-window-right throw-window-right  #:spec "%f")
+  (define-command 'throw-focused-window-left throw-window-left  #:spec "%f")
+  (define-command 'throw-focused-window-top throw-window-up  #:spec "%f")
+  (define-command 'throw-focused-window-bottom throw-window-down #:spec "%f")
+)
