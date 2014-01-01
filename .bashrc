@@ -9,7 +9,6 @@ LESSOPEN="|gzip -cdf --stdout %s"
 AUTHORCOPY=$HOME/Mail/sent
 VISUAL=vi
 EDITOR=$VISUAL
-GEM_HOME=/home/dan/gem
 export LS_COLOURS LESSOPEN PATH LESSCHARSET AUTHORCOPY REPLYTO TEXINPUTS VISUAL EDITOR GEM_HOME
 
 umask 002
@@ -24,3 +23,5 @@ function e { 	emacsclient $* ; }
 function bx { bundle exec $*; }
 
 function xp { kvm -net user -net nic,model=e1000 -smb /big/ -soundhw es1370,ac97  -m 512 -hdc ~/xp.qcow2  -hdd ~/drived.qcow ; }
+
+test -f /etc/profile.d/chruby.sh && . /etc/profile.d/chruby.sh
