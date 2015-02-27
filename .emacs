@@ -197,6 +197,7 @@
  '(browse-url-browser-function (quote browse-url-netscape))
  '(canlock-password "c504963db2bafd718ff487d9217561e4d030710f")
  '(case-fold-search t)
+ '(cider-repl-print-length 25)
  '(clojure-swank-command "lein2 jack-in %s")
  '(current-language-environment "ASCII")
  '(display-time-mode t)
