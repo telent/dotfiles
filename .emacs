@@ -208,6 +208,28 @@
  '(smiley-regexp-alist nil)
  '(uce-mail-reader (quote gnus)))
 
+(defun new-yablog-post (blog title)
+  (let* ((name (concat blog
+		       (format-time-string "%Y%m%d_")
+		       (replace-regexp-in-string 
+			"[^A-Za-z0-9_-]" "" 
+			(replace-regexp-in-string " " "_"  title))
+		       ".textile"
+		       ))
+	 (buf (find-file name)))
+    (save-current-buffer
+      (set-buffer buf)
+      (insert (format "Title: %s\nDate: %s\n\n"
+		      title (current-time-string))))))
+
+(defun blog-telent (&optional title)
+  (interactive "MBlog post title: ")
+  (new-yablog-post "/home/dan/src/telent.blog/posts/" title))
+
+(defun blog-coruskate (&optional title)
+  (interactive "MBlog post title: ")
+  (new-yablog-post "/home/dan/src/coruskate.blog/posts/" title))
+
 
 ;;; ange-ftp passive mode
 (add-hook `ange-ftp-process-startup-hook
