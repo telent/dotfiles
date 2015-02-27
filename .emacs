@@ -67,6 +67,15 @@
 (define-key global-map "\C-c\C-sf" 
   '(lambda () (interactive nil) (message (buffer-file-name))))
 
+(defun find-todo-list ()
+  (interactive nil)
+  (let ((d (locate-dominating-file buffer-file-name "TODO.org")))
+    (if d
+	(find-file (expand-file-name "TODO.org" d))
+	(message "Can't find TODO.org near here"))))
+(define-key global-map  "\C-c\C-st" 'find-todo-list)
+
+
 (define-key global-map [home] 'beginning-of-line)
 
 ;; This *should* work sensibly.  On the console, backspace produces DEL, delete 
@@ -198,6 +207,7 @@
  '(mail-user-agent (quote message-user-agent))
  '(message-user-organization "Telent Netowrks - network solutions for poor typists")
  '(mm-automatic-display (quote ("text/plain" "text/enriched" "text/richtext" "te xt/x-vcard" "image/.*" "message/delivery-status" "multipart/.*" "message/rfc822" "text/x-patch" "application/pgp-signature" "application/emacs-lisp")))
+ '(org-todo-keywords (quote ((sequence "TODO" "WIP" "DONE"))))
  '(pgg-passphrase-cache-expiry 300)
  '(pgg-query-keyserver t)
  '(ps-lpr-command "lp")
@@ -207,6 +217,9 @@
  '(slime-conservative-indentation nil)
  '(smiley-regexp-alist nil)
  '(uce-mail-reader (quote gnus)))
+
+(require 'org)
+(define-key org-mode-map "\C-tab" 'show-all)
 
 (defun new-yablog-post (blog title)
   (let* ((name (concat blog
