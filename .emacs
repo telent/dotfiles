@@ -60,15 +60,6 @@
 
 (define-key global-map [f12] 'compile)
 
-;(define-key global-map [\s-s] 'slime-selector)
-;(define-key global-map [?\s-r]
-;  (lambda () (interactive);
-;	  (if (slime-connected-p)
-;	      (switch-to-buffer "*inferior-lisp*")
-;	      (slime))))
-
-;
-
 (define-key global-map "\C-c\C-id" 
   '(lambda () (interactive nil)   (insert (current-time-string))))
 (define-key global-map "\C-c\C-if"
@@ -130,19 +121,8 @@
 (setq slime-multiprocessing t)
 
 (setq lisp-indent-function 'common-lisp-indent-function)
-;(require 'slime);
-;
-;(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
-;(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
-
-;(define-key slime-repl-mode-map [C-up] 'slime-repl-previous-input)
-;(define-key slime-repl-mode-map [C-down] 'slime-repl-next-input)
-
-
 
 (setq scheme-program-name "guile")
-
-;(setq inferior-lisp-program "/usr/local/bin/sbcl --noinform")
 
 (setq common-lisp-hyperspec-root "file:///usr/share/doc/hyperspec/")
 (setq common-lisp-hyperspec-symbol-table "/usr/share/doc/hyperspec/Data/Map_Sym.txt")
@@ -173,9 +153,6 @@
 
 (add-hook 'java-mode-hook (lambda () (setq c-basic-offset 4)))
 (setq c-basic-offset 4)
-
-
-
 
 ;; ***********************************************************************
 ;; Caml mode
@@ -231,20 +208,6 @@
  '(smiley-regexp-alist nil)
  '(uce-mail-reader (quote gnus)))
 
-(defun browse-url-dillo (url &optional new-window)
-  ;; new-window ignored
-  "Ask Dillo to load URL.
-Default to the URL around or before point.  Always starts a new instance
-of Dillo, ignoring new-windonw argument"
-  (interactive (browse-url-interactive-arg "Dillo URL: "))
-  (start-process (concat "dillo:" url) nil
-		 (executable-find "nohup")
-		 (executable-find "dillo")
-		 url))
-
-(defadvice common-lisp-hyperspec (around wrap-dillo 0 (symbol) activate)
-  (let ((browse-url-browser-function #'browse-url-dillo))
-    ad-do-it))
 
 ;;; ange-ftp passive mode
 (add-hook `ange-ftp-process-startup-hook
@@ -255,50 +218,9 @@ of Dillo, ignoring new-windonw argument"
 			   (ange-ftp-error
 			    host user (concat "Passive mode failed: "
 					      result))))))
-(when (and (boundp 'debian-emacs-flavor)
-	   (eq debian-emacs-flavor 'emacs21))
-  (tool-bar-mode 0)
-  (scroll-bar-mode -1)
-  ;(gnus-smiley-display 0)
-  (blink-cursor-mode 0))
+(tool-bar-mode 0)
+(scroll-bar-mode -1)
+(blink-cursor-mode 0)
 
-(setq mail-sources '((maildir :path "~/Maildir/")))
-
-(setq gnus-select-method '(nnmaildir ""
-			   (get-new-mail t)
-			   (target-prefix "")
-			   (directory "~/Maildir/folders/")))
-(setq gnus-select-method '(nntp "news.zen.co.uk"))
-
-			   
-(setq nnmail-split-methods '(("list.\\1" "List-Id:.*<\\(.*\\)>")
-			     ("list.\\1" "List-Id: *\\(.*\\)$")
-			     ("list.\\1" "X-list: *\\(.*\\)$")
-			     ("dubious" "X-Spambayes.*unsure")
-			     ("misc" "")))
-
-
-(defun spambayes-train-spam (&optional arg)
-  (interactive (gnus-interactive "P"))
-  (let ((gnus-default-article-saver 
-	 (lambda (x) 
-	   (gnus-summary-save-in-pipe
-	    "ssh eval.metacircles.com /home/dan/python/bin/sb_filter.py -s -f")))
-	(gnus-save-all-headers t))
-    (gnus-summary-save-article arg t)))
-(defun spambayes-train-ham (&optional arg)
-  (interactive (gnus-interactive "P"))
-  (let ((gnus-default-article-saver 
-	 (lambda (x) 
-	   (gnus-summary-save-in-pipe
-	    "ssh eval.metacircles.com /home/dan/python/bin/sb_filter.py -g -f")))
-	(gnus-save-all-headers t))
-    (gnus-summary-save-article arg t)))
-
-(require 'gnus)
-(define-key gnus-summary-mode-map "\C-cS" 'spambayes-train-spam)
-(define-key gnus-summary-mode-map "\C-cH" 'spambayes-train-ham)
-  
 (put 'downcase-region 'disabled nil)
 
-(setq notmuch-command "/usr/bin/notmuch")
