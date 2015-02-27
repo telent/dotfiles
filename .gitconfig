@@ -6,3 +6,4 @@
 [alias]
 	ci=commit
 	rec=add -p -i
+	co=checkout
